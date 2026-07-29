@@ -4,8 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import {
   ExternalLink,
-  Code,
-  User,
   Mail,
   ArrowRight,
   ChevronDown,
@@ -23,6 +21,7 @@ import {
   SiGit,
   SiGithub,
 } from 'react-icons/si';
+import { FaLinkedin } from 'react-icons/fa';
 
 // Components
 const NAV_LINKS = [
@@ -231,12 +230,10 @@ const HeroSection = () => {
           </div>
 
           <p className="text-lg text-slate-400 leading-relaxed max-w-md mx-auto md:mx-0">
-            {/* I craft elegant, performant web applications with modern technologies.
-            Specializing in React, Next.js, and full-stack development. */}
-             I turn ideas into polished, high-performance web products — from custom React and Next.js apps to full Shopify storefronts and e-commerce solutions.
+            I turn ideas into polished, high-performance web products — from custom React and Next.js apps to full Shopify storefronts and e-commerce solutions.
           </p>
 
-          <div id="hero-cta" className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
             <button
               onClick={() => handleSmoothScroll('#projects')}
               className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-900 font-semibold rounded-lg hover:opacity-90 transition-opacity cursor-pointer"
@@ -273,7 +270,6 @@ const HeroSection = () => {
             />
             {/* Gradient border ring */}
             <div className="relative p-1 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600">
-              <div className="p-1 rounded-full bg-slate-900">
                 <Image
                   src="/kerim_blue.jpg"
                   alt="Kerim Smajlovic"
@@ -281,7 +277,6 @@ const HeroSection = () => {
                   height={320}
                   className="rounded-full object-cover w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80"
                 />
-              </div>
             </div>
           </div>
         </div>
@@ -317,7 +312,7 @@ const TechStackSection = () => {
           <p className="text-slate-400 text-lg">Technologies I work with and love</p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {technologies.map((tech) => (
             <div
               key={tech.name}
@@ -325,7 +320,7 @@ const TechStackSection = () => {
             >
               {/* Radial glow from top on hover */}
               <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-2xl"
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
                 style={{
                   background: `radial-gradient(ellipse at 50% -10%, ${tech.color}28, transparent 70%)`,
                 }}
@@ -560,7 +555,7 @@ const ContactSection = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-800 text-slate-100 font-semibold rounded-lg border border-slate-700 hover:border-cyan-400 hover:text-cyan-400 transition-colors"
             >
-              <Code size={20} />
+              <SiGithub size={20} />
               GitHub
             </a>
             <a
@@ -569,7 +564,7 @@ const ContactSection = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-800 text-slate-100 font-semibold rounded-lg border border-slate-700 hover:border-cyan-400 hover:text-cyan-400 transition-colors"
             >
-              <User size={20} />
+              <FaLinkedin size={20} />
               LinkedIn
             </a>
           </div>
