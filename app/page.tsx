@@ -8,6 +8,7 @@ import {
   User,
   Mail,
   ArrowRight,
+  ChevronDown,
 } from 'lucide-react';
 import {
   SiReact,
@@ -20,6 +21,7 @@ import {
   SiShopify,
   SiStripe,
   SiGit,
+  SiGithub,
 } from 'react-icons/si';
 
 // Components
@@ -362,7 +364,8 @@ interface ProjectCardProps {
   description: string;
   technologies: string[];
   isComingSoon?: boolean;
-  link?: string;
+  demoLink?: string;
+  githubLink?: string;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -370,7 +373,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
   technologies,
   isComingSoon = false,
-  link,
+  demoLink,
+  githubLink,
 }) => {
   return (
     <div className="group relative overflow-hidden rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 transition-all duration-300 hover:-translate-y-2">
@@ -396,16 +400,31 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           ))}
         </div>
 
-        {!isComingSoon && link && (
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors text-sm font-medium pt-2"
-          >
-            View Project
-            <ExternalLink size={16} />
-          </a>
+        {!isComingSoon && (demoLink || githubLink) && (
+          <div className="flex items-center gap-4 pt-2">
+            {demoLink && (
+              <a
+                href={demoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300 transition-colors text-sm font-medium"
+              >
+                <ExternalLink size={15} />
+                Live Demo
+              </a>
+            )}
+            {githubLink && (
+              <a
+                href={githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors text-sm font-medium"
+              >
+                <SiGithub size={15} />
+                GitHub
+              </a>
+            )}
+          </div>
         )}
       </div>
     </div>
@@ -414,6 +433,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
 // Projects Section
 const ProjectsSection = () => {
+  const [showAll, setShowAll] = useState(false);
+
   const projects = [
     {
       title: 'E-Commerce Platform',
@@ -432,30 +453,76 @@ const ProjectsSection = () => {
     {
       title: 'My Portfolio',
       description:
-        'This minimalist portfolio website showcasing my work and skills. Built with Next.js, Tailwind CSS, and deployed on Vercel for optimal performance.',
+        'This portfolio website showcasing my work and skills. Built with Next.js, Tailwind CSS, and deployed on Vercel for optimal performance.',
       technologies: ['Next.js', 'Tailwind CSS', 'TypeScript', 'Vercel'],
       isComingSoon: false,
-      link: '#',
+      githubLink: 'https://github.com/keraa00/portfolio',
+    },
+    {
+      title: 'ESPRO | E-Commerce Website',
+      description:
+        'Frontend single-page e-commerce website for ESPRO. Fully responsive UI with product listings and a clean modern design. Built as a frontend-only project.',
+      technologies: ['React', 'Tailwind CSS'],
+      isComingSoon: false,
+      demoLink: 'https://kerim-espro-ecommerce.netlify.app/',
+      githubLink: 'https://github.com/keraa00/espro-e-commerce',
+    },
+    {
+      title: 'Pillows | E-Commerce Website',
+      description:
+        'Frontend single-page e-commerce website for a pillows brand. Fully responsive with a clean product layout and mobile-first design. Built as a frontend-only project.',
+      technologies: ['React', 'Tailwind CSS'],
+      isComingSoon: false,
+      demoLink: 'https://kerim-pillows-e-commerce.netlify.app/',
+      githubLink: 'https://github.com/keraa00/pillows',
     },
   ];
+
+  const featured = projects.slice(0, 3);
+  const extra = projects.slice(3);
 
   return (
     <section
       id="projects"
       className="min-h-screen flex items-center justify-center bg-slate-900 px-6 py-20"
     >
-      <div className="max-w-5xl mx-auto w-full space-y-12">
+      <div className="max-w-5xl mx-auto w-full space-y-8">
         <div className="text-center space-y-4">
           <h2 className="text-4xl md:text-5xl font-bold text-white">Projects</h2>
           <p className="text-slate-400 text-lg">
-            Featured work and things I'm building
+            Featured work and things I&apos;m building
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
+          {featured.map((project, index) => (
             <ProjectCard key={index} {...project} />
           ))}
+        </div>
+
+        {/* Expandable extra projects */}
+        <div
+          className="overflow-hidden transition-all duration-500 ease-in-out"
+          style={{ maxHeight: showAll ? '600px' : '0px', opacity: showAll ? 1 : 0 }}
+        >
+          <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            {extra.map((project, index) => (
+              <ProjectCard key={index + 3} {...project} />
+            ))}
+          </div>
+        </div>
+
+        <div className="text-center pt-2">
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg border border-slate-700 text-slate-300 hover:border-cyan-400 hover:text-cyan-400 transition-colors duration-200 text-sm font-medium cursor-pointer"
+          >
+            {showAll ? 'View Less' : 'View More Projects'}
+            <ChevronDown
+              size={16}
+              className={`transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`}
+            />
+          </button>
         </div>
       </div>
     </section>

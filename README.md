@@ -2,7 +2,7 @@
 
 Personal portfolio website built to showcase my work, skills, and experience as a Full-Stack Developer.
 
-**Live site:** [kerimsmajlovic.dev](https://kerimsmajlovic.dev) <!-- update with your actual URL -->
+**Live site:** [kerimsmajlovic.dev](https://kerimsmajlovic.dev)
 
 ---
 
